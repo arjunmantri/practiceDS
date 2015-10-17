@@ -1,0 +1,264 @@
+Class Tree{
+    void inorder(Node root){
+        if(root == null)return;
+        stack<Node> s = new stack<Node>();
+        Node curr = root;
+        while(!s.Empty() || curr != null){
+            if(curr != null){
+              s.add(curr);
+              curr=curr.left;  
+            }
+            else{
+                curr = s.pop();
+                System.out.println(curr.data+" ");
+                curr=curr.right;
+            }
+        }
+    }
+------------------------------------------------------------------
+  
+    void preorder(Node n){
+            if(root == null)return;
+            Stack<Node> s = new Stack<Node>();
+            Node curr = null;
+            s.push(n);
+            while(!s.isEmpty()){
+                curr = s.pop();
+                System.out.println(curr.data);
+                if(curr.left!=null)curr=curr.left;
+                if(curr.right!=null)curr=curr.right;
+            }
+        }
+}
+
+------------------------------------------------------------------
+/*check if summ is zero and also root is null i.e EC, interm sum every time to reduce the sum and pass it */
+boolean hasPathSum(Node root, int sum){
+    if(root == null && sum == 0)return true;
+    if(root == null)return false;
+    int intermediateSum = sum - root.data;
+    return hasPathSum(root.left, intermediateSum) || hasPathSum(root.right,intermediateSum);
+}
+------------------------------------------------------------------
+int balancedTree(Node root){
+    if(root == null)return -1;
+    int left = balancedTree(root.left);
+    if(left == -1)return -1;
+    
+    int right = balancedTree(root.right);
+    if(right == -1)return -1;    
+     
+    int diffHeight = left - right;
+    if(diffHeight>1) return -1;
+    else return 1+Math.max(left,right);
+}
+boolean isBalanceTree(){
+    if(balancedTree(root)==1)return true;
+    else return false;
+}
+
+------------------------------------------------------------------
+public static isUnique(String str){
+    boolean[] char_set = new boolean[256];
+    int len = str.length();
+    for(int i=0;i<len;i++){
+        if(char_set[str.charAt(i)])return false;
+        else char_set[str.charAt(i)] = true;
+    }
+    return true;
+}
+------------------------------------------------------------------
+public static String removeDups(String str){
+    Hashset<Character> hm = new Hashset<Character>();
+    String op="";
+    int len = str.length();
+    for(int i=0;i<len;i++){
+        if(!hm.contains(str.charAt(i)){
+            hm.add(str.charAt(i));
+            op+=str.charAt(i);
+        }
+        return op;
+    }
+}
+
+------------------------------------------------------------------
+//Using the utility method
+public static String reverseWord(String word,int start,int end){
+    string rev="";
+    for(int i=end-1;i<start;i--){
+        rev+=rev.charAt(i);
+    }
+    return rev;
+}
+------------------------------------------------------------------
+//Rotate array
+public static void rotateArray(int[] a,int num){
+    if(num > a.length)return;
+    rotateArray(a,0,num-1);
+    rotateArray(a,num,a.length-1);
+    rotateArray(a,0,a.length-1);
+    for(int 1:a)System.out.print(i+" ");
+}
+
+------------------------------------------------------------------
+Class Stack{
+    Node top;
+    Node pop(){
+        while(top != null){
+            Object item = top.data;
+            top = top.next;
+            return item;
+        }
+        retun null;
+    }
+    Node push(){
+        Node t = new(item);
+        t.next = top;
+        top = t;
+    }
+}
+------------------------------------------------------------------
+/* Matrix multiplication , in this the row for a remains constant while the column for b matrix remains the same and adding the previous value of c to it */
+public int[][] matrixMultiplication(int[][] a, int[][] b){
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+             for(int k=0;k<n;k++){
+                c[i][j] = c[i][j] + a[i][k]*b[k][j];
+            }   
+        }    
+    }
+}
+------------------------------------------------------------------
+/*valid-parentheses, */
+public boolean validParentheses(String s){
+    HashMap<character, character> map = new HashMap<character,character>();
+    map.put('(', ')');
+    map.put('[', ']');
+    map.put('{', '}');
+    
+    Stack<Character> parentheses = new Stack<Character>();
+    
+    for(int i=0;i<=str.length();i++){
+        char curr = s.charAt(i))
+        if(map.keySet().contains(curr)) //checking the key and if present push the key to the stack, hence used KeySet()
+            parentheses.push(curr);
+        else if(map.values().contains(curr)){
+                if(!parentheses.empty() && map.get(parentheses.peek()) ==  curr) //check for the peek and compare it with the value present in the map store by using the get map function
+                    parentheses.pop();
+                else return false //if peek doesn't matches return false.
+            }
+        }
+    return parentheses.empty();
+}
+------------------------------------------------------------------
+/* permutation of strings, remember the n-factorial example. swap the elements and do recursion to call the permutation string again do the swap to restore to original position  
+http://www.ericleschinski.com/c/java_permutations_recursion/ - link  
+public void permutationOfStrings(int[] A,k,n){
+    if(k==n) {
+        for(int i=0;i<n;i++)
+        System.out.println(A[i]);
+    }
+    else {
+        int t =  a[i]; //swap to take the combination of remaining elements
+        a[i] = a[k];
+        a[k] = t;
+        permutationofString(A,k+1,n);
+        int t =  a[i]; //swap to restore the original position.
+        a[i] = a[k];
+        a[k] = t;
+      }
+}*/
+-----------------------------------------------------------------
+/*http://www.ericleschinski.com/c/java_permutations_recursion/
+Run this code in tutoriaspoint to get. Adding prefix with the first char. Now substring 0 and i location, appned substring i+1 to the string...
+prefix, str
+""      (A)BCD            
+A       (B)CD 
+AB      (C)D          
+ABC     (D)
+ABCD    ""           
+ABC     D            
+AB      C(D)         
+ABD     C        D was chopped off, because for loop is at index 1 now. looping over 'C' now
+ABDC    ""       Add C to prefix.  BASE CASE!  print: "ABDC".*/
+import java.io.*;
+public class Main {
+    private static void permutation(String prefix, String str){
+        int n = str.length();
+        if (n == 0) 
+            System.out.println(prefix);
+        else {
+            for (int i = 0; i < n; i++){
+                System.out.println("prefix :"+prefix + str.charAt(i));
+                System.out.println("append :"+str.substring(0, i) + str.substring(i+1));
+                permutation(prefix + str.charAt(i), 
+            str.substring(0, i) + str.substring(i+1)); //takes first char 'A' and appends 'BCD' den, 'AB' appends 'CD'and so on.
+            }
+        }
+    }
+    public static void main(String[] args) {
+        permutation("", "ABCD");
+    }
+    }
+
+------------------------------------------------------------------
+/* Coin problem. Working on one choice and taking combination with other values in arrayList. In recursion remaining acts as numbers and den partial_rec acts as partial*/
+public static void main(String args[]){
+    Integer numberes[] = {1,2,3,45,7,2,}; //declaring an Integer to pass as ArrayList to sum_up()
+    int target = 48;
+    sum_up(new ArrayList<Integer>(Array.asList(numbers)),target);//ArrayList have dynamic size whereas array's don't. When we pass integer to arraylist autoboxing converts the integer primitive to integer objects. ArrayList can only store objects while array can store both.
+}
+
+static void sum_up(ArrayList<Integer> numbers,int target){
+    sum_up_recursive(numbers,target,new ArrayList<Integer>());
+}
+
+static sum_up_recursive(ArrayList<Integer> numbers,int target,ArrayList<Integer> partial){
+    int sum = 0;
+    for(int x: partial) sum += x;
+    if(sum == target){ //matching with the target...base condition.
+        System.out.println("Sum" + ArrayList.toString(partial.toArray())+")" +target);
+        
+    }
+    if(sum > target) return;
+    for(int i = 0; i <numberes.size() ;i++){
+        ArrayList<Integer> remaining = new ArrayList<Integer>();
+        int n = number.get(i);
+        for(int j = i+1; j < numbers.size(); j++)
+            remaining.add(numbers.get(j)); //all the remaining element into it except one.
+        ArrayList<Integer> partial_rec = new ArrayList<Integer>(partial);//Intial capacity
+        partial_rec.add(n);//adding the first element from numbers
+        sum_up_recursive(remaining,target,partial_rec);
+    }
+    
+} 
+------------------------------------------------------------------
+/* above same problem in python */
+def sum_set (numbers, target, partial=[]):
+    s = sum(partial)
+    if s == target
+        print "s%s = %s" %s (partial,target)
+    if s > target 
+        return
+    for i in range(len(numbers)):
+        n = numbers[i]
+        remaining = numbers[i+1:]
+        sum_set(remaining, target, partial + [n])
+
+if __name__ == "__main__":
+    subset_sum([3,9,8,4,5,7,10],15)
+------------------------------------------------------------------
+#sample python with main class
+class Example(Object):
+    def add()
+        print "Hi how are you" #if not we return .
+    
+if __name__ == "__main__":
+    Example().add()
+------------------------------------------------------------------
+/* remove duplicates from a large file, 1) first answer that u can use hashmap but con of it is that it gives javarunoutofmemory for larger set like 15million records.
+2)The key is that your data will not fit into memory. You can use external merge sort for this:Partition your file into multiple smaller chunks that fit into memory. Sort each chunk, eliminate the duplicates (now neighboring elements).Merge the chunks and again eliminate the duplicates when merging. Since you will have an n-nway merge here you can keep the next k elements from each chunk in memory, once the items for a chunk are depleted (they have been merged already) grab more from disk.*/
+
+public void removeDuplicateFromFile(){
+    
+}
