@@ -1,0 +1,239 @@
+------------------------------------------------------------------
+//In this take two pointers, incr 1 by one and 2 by two and keep chckng for data if equal 
+//loop exists
+public void detectLoop(Node head){
+    if(head == null) return;
+    Node curr = head;
+    Node incrByTwo = head;
+    while(incrByTwo != null && incrByTwo.next!=null){
+        incrByTwo=incrByTwo.next.next;
+        curr = curr.next;
+        if(curr.data == incrByTwo.data){
+            System.out.println("Loop Exists");
+            break;
+        }
+        if(incrByTwo==null|| incrByTwo.next==null){
+           System.out.println("Loop doesnt Exists"); 
+           return;
+        }
+    }
+}
+------------------------------------------------------------------
+public void middleElement(Node head){
+    if(head == null)return;
+    Node curr = head;
+    Node incrByTwo = head.next;
+    while(incrByTwo!=null || incrByTwo.next!=null){
+        cur= cur.next;
+        incrByTwo = incrByTwo.next.next;
+    }
+    System.out.println("The middle element is :"+curr.data);
+}
+------------------------------------------------------------------
+public void reverseLinkList(Node head){
+    if(head == null)return;
+    Node prevNode = null;
+    Node nextNode;
+    Node current = head;
+    while(current!=null){
+        nextNode = current.next;
+        current.next = prevNode;
+        prevNode = current;
+        current = nextNode;
+    }
+}
+------------------------------------------------------------------
+public void removeDupLinkList(Node head){
+    if(head == null)return;    
+    Node current = head;
+    while(current.next != null){
+        if(current.next.data == current.data){
+            current.next = current.next.next;
+        }
+        else current = current.next;
+    }
+}
+------------------------------------------------------------------
+public void removeDupLinkHashmap(Node head){
+    if(head == null)return;
+    
+}
+------------------------------------------------------------------
+
+/*Mergesort for the linklist */
+public Node mergeSortLinkList(Node head){
+    if(head==null || head.next == null) return head;
+    a = head;
+    b = head.next;
+    while(b!=null && b.next!=null){ //**Finding the middle element of the linkList
+        head = head.next;
+        b = b.next.next;
+    }
+    b = head.next; //middle element of the link list
+    head.next = null;
+    merge(mergeSortLinkList(a),(mergeSortLinkList(b));
+}
+public Node merge(Node a , Node b){
+    Node temp = new Node();
+    Node head = temp;
+    Node c = head;
+    while(a!=null && b!= null){
+        if(a.data <= b.data){
+            c.next = a;
+            c = a;
+            a = a.next;
+        }
+        else{
+            c.next = b;
+            c = b;
+            b = b.next;
+        }
+    
+    }
+}
+------------------------------------------------------------------
+/* towerofhanoi, declare array of stack and den move from 1 to 3, 1 to 2 and den back to 2. Repeat dis recursivley until ol disk unstacked from 1 */
+class towerofhanoi{
+Stack<Interger> tower[] = new Stack<Integer>[3];
+
+public static void main(String args[]){
+        System.out.println("Enter the number of disks");
+        Scanner kbd = new Scanner(System.in);
+        int n = kbd.nextInt();
+        tower[1] = new Stack<Integer>();
+        tower[2] = new Stack<Integer>();
+        tower[3] = new Stack<Integer>();
+        towerH(n);
+    }
+public void towerH(int n){
+     for(int i = n; i > 0; i--)
+         tower[1].push(i);   
+         move(n,1,2,3);
+    }
+public void move(int n, int a, int b, int c){
+        if(n > 0){
+        move(n,a,c,b);
+        tower[c].push(tower[a].pop());
+        move(n-1,b,a,c)
+        }
+    }
+}
+
+------------------------------------------------------------------
+/* Intersection of link list. First calculate the length of two lists and find the difference. Then start from the longer list at the diff offset, iterate though 2 lists and find the node.*/
+public Node intersectionOfList(Node headA, Node headB){
+    Node p1, P2;
+    p1 = headA;
+    p2 = headB;
+    int len1, len2;
+    if(p1 == null || p2 == null){
+        return null;
+    }
+    while(p1.next != null){
+        len1++;
+        p1 = p1.next;
+    }
+    while(p2.next != null){
+        len2++;
+        p2 = p2.next;
+    }
+    int diff;
+    p1 = headA;
+    p2 = headhB;
+    
+    if(len1 > len2){
+        diff = len1 - len2
+        int i = 0;
+        while(i < diff){
+            p1 = p1.next;
+            i++;
+        }
+      }
+    else{
+        diff = len2 - len1;
+        int i = 0;
+        while(i < diff){
+            p2 = p2.next;
+            i++;
+        }
+    }
+    while(p1 != null && p2 != null){ //this is the reason we move it by difference and den put a && condition here in the while loop. Because we wont know den when to end condition for the while loop, hence the above diff value.
+        if(p1.val == p2.val)
+            return p1;
+        p1 = p1.next;
+        p2 = p2.next;
+    }
+    return null;    
+}
+------------------------------------------------------------------
+class Stack{
+   int top=-1, size, len=0;
+   int array[];
+   Scanner kbd = new Scanner(System.in);
+   size = kbd.nextInt();
+   array =  new [size];
+   
+   boolean isEmpty(){
+       return top == -1;
+   }
+   
+   void push(int data){
+       if(!isEmpty()){
+       arr[top++] = data;
+       len++;
+       }
+   
+       else new IndexOutOfBoundsException("Overflow Exception"); //important to throw an exception from the point of interview as well.
+   }
+   int pop(){
+
+        if(!isEmpty()){
+               len--;
+               return arr[top--];
+       }
+   }
+    int min(){
+        if(){
+            
+        }
+    }   
+} 
+------------------------------------------------------------------
+/* BFS tree not graph in case of graphs we pass the adjcent matrix which does it
+link for graphs - http://www.sanfoundry.com/java-program-traverse-graph-using-bfs/ 
+link for tree - http://algorithms.tutorialhorizon.com/breadth-first-searchtraversal-in-a-binary-tree/
+Level Order Traversal or BFS tree traversal
+store the root and den store the left, right den print it checking if left or right present or not.*/
+
+public void BFSTree(Node root){
+    if(root == null) return null;
+    //Queue<Node> q = new LinkedList<Node>(); can also declare ref as queue and initliaze as Linklist
+    Queue<Node> q = new Queue<Node>();
+    q.add(root);
+   //Node current = root;
+    while(!q.isEmpty()){
+        Node n = (Node) q.remove(); //remove and store it in the. 
+        System.out.println(n.data()+" ");
+        if(n.right != null)q.add(n.right);
+        if(n.left != null)q.add(n.left);
+    }
+}  
+------------------------------------------------------------------
+/* 2 Largest Increasing Subsequence Interview with Jon. Consider a current and max. if current is less den 0
+reset it to zero, if max is less den current set max to current. if current is not less den 0 add elements to current*/
+
+public int largetOfTwoNumbersSubsequence(int []a){
+    int current = 0;
+    int max = 0;
+    for(int i = 0; i < a.length(); i++){
+        if(current < 0)
+            current = 0;
+        else{
+            current += a[i];
+            if(current > max)
+                max = current;
+        } 
+            
+    }
+    return max;
+}
