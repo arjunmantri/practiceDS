@@ -1,0 +1,349 @@
+------------------------------------------------------------------
+Two pointers concept, hash contains or not used in many problems to find solutions.
+------------------------------------------------------------------
+
+public class demo{
+
+Hashtable sample = new Hashtable();
+sample.put("arjun","mantri");
+sample.get("arjun");
+sample.containsKey("key");
+
+}
+------------------------------------------------------------------
+/* Dijktras - greedy approach.
+Shortest path */
+private final List<Vertex> nodes;
+private final List<Edge> edges;
+/*pseudo code*/
+/*In the method below we declare different list for distance, unsettled, settled nodes, predecessor wherein we store the parent node. Loop thru the unsettled, add to settle, remove from unsettle and findtheNeighboures*/
+public void dijktras(Vertex source){
+    Set unsettledNodes = new HashSet<Vertex>();
+    Set settledNodes = new HashSet<Vertex>();
+    HashMap distance = new HashMap<Vertex,Integer>();
+    HashMap predecessor = new HashMap<Vertex>();
+    distance.put(source,0);
+    while(unsettledNodes.size() > 0){
+        Vertex node = getMinimum(unsettledNodes);
+        settledNodes.add(node);
+        unsettledNodes.remove(node);
+        findMinimalDistance(node);
+    } 
+}
+/*In the method below find the neighbour nodes, get the distance directly or via some node store that into distance list, add that target node to the predesscor which is the parent list and finally adding that to the unsettled nodes list*/
+public void findMinimalDistance(Vertex node){
+   List <Vertex> adjacentNodes = getNeighbors(node);
+   for(Vertex target : adjacentNodes){
+       if(getShortDistance(target) > (getShortDistance(node)+ getDistance(node,target))){
+           distance.put(target, getShortDistance(node)+ getDistance(node,target));
+           predecessor.put(target);
+           unsettledNodes.add(target); //adding the remaining from the for loop to the unSettledNodes.
+         }
+   }
+}
+/*checks for the source and destination of the edge. Check if the destination is present in the settled or not and then add to the neighbors list. return this list*/
+public List<Vertex> getNeighbors(Vertex node){
+    List<Vertex> neighbors = ArrayList<Vertex>();
+    for(Edge edge: edges){
+        if(edge.getSource().equal(node) && !isSettled(edge.getDestination())){
+            neighbors.add(edge.getDestination());
+        }
+    }
+    return neighbors;
+}
+/*Get the edge source and destination, match with values pased. Return the weight. Since we are checking the settled nodes in the getNeighbors so no need to check it here*/
+public double getDistance(Vertex node, Vertex target){
+    for(Edge edge: edges){
+        if(edge.getSource().equal(node) && edge.getDestination().equals(target)){
+            return edge.getWeight(); //return the weight of the edge
+        }
+    }
+}
+/* get minimum node vertex by comparing the minimum & de vertex */
+public Vertex getMinimum(set<Vertex> vertexes){
+    Vertex minimum = null;
+    for(Vertex vertex : vertexes){
+        if(minimum == null){
+            minimum = vertex;
+        }
+        else if(getShortDistance(minimum) > getShortDistance(vertex)){
+            minimum = vertex;
+        }
+    }
+    return minimum;
+}
+/* get the shortest distance and return the corresponding int value*/
+public double getShortDistance(Vertex node){
+    int d = distance.get(node);
+    if(d == null){
+        return Integer.MAX_VALUE; 
+    }
+    else return d;
+}
+
+/*returns if the vertex is present in the settled node list or not*/
+Private boolean isSettled(Vertex vertex){
+    return settledNodes.contains(vertex);
+}
+
+public List<Vertex> getPath(Vertex target){
+    
+}
+------------------------------------------------------------------
+public void uniqueString(String word){
+    boolean[] char_set = new boolean[256];
+    for(int i=0;i<word.length();i++){
+        int val = word.charAt(i);
+        if(char_set[val]) return false;
+        char_set[val] = true;
+        if()
+    } 
+    return true;
+}
+------------------------------------------------------------------
+public void uniqueString(String word){
+    HashMap check = new HashMap<>
+}
+------------------------------------------------------------------
+public String checkDuplicate(String str){
+   if(str==null)return null;
+   HashMap<Character> checkDup = new HashMap<Character>(); 
+   String remove = "";
+   for(int i =0; i< str.length(); i++){
+       if(!checkDup.contains(str.charAt(i))){
+           checkDup.add(str.charAt(i));
+           remove+=str.charAt(i);
+       }
+   }
+   return remove;
+}
+------------------------------------------------------------------
+/*isAnagram or not. add to the hashmap if not present with +1 as the count, if already present than do "++" for the same count (for string a). Now for string b check if the char in present in the map, if count is 1 den remove or else do "--"...if empty its anagram*/
+public boolean isAnagram(String a, String b){
+    boolean check = false;
+    if(a.length() != b.length()) return check;
+    HashMap<Character,Interger> m = new HashMap<Character,Integer>();
+    Char[] p = a.toLowerCase().toCharArray();
+    Char[] q = b.toLowerCase().toCharArray();
+    
+    for(int i = 0; i < p.length(); i++){
+       if(m.contains(p[i]){
+           int temp = m.get(p[i]);
+           m.add(p[i],temp++);
+       } 
+       else{
+           m.add(p[i],1);
+       }
+    }
+    
+    for(int i = 0; i < q.length(); i++){
+        if(m.contains(q[i])){
+            int temp = m.get(q[i]);
+            if(temp == 1){
+                m.remove(q[i]);
+            }
+            else{
+                m.add(q[i],temp--);
+            }
+        }
+        else return flag;
+        
+    }
+    if(m.isEmpty()){
+        System.out.println("Anagram found");
+        return true;
+    }
+}
+------------------------------------------------------------------
+class Node{
+    Node next = null;
+    int data;
+    Node(int data){
+        Node.data = data;
+    }
+    void appendTail(int data)
+        Node end = new Node(data);
+        Node n = this;
+        while(n.next != null){
+            n = n.next;
+        }
+        n.next = end;
+    }
+    public Node deleteNode(Node head, int data){
+        if(n.data == data){
+            return head.next;
+        }
+        while(n.next != null){
+            if(n.data == data){
+              n.next = n.next.next;
+              return head;  
+          }
+          n = n.next;
+        }
+        
+    }
+}
+------------------------------------------------------------------
+/* use two hashtable to check if the element is present or not if not add, make value as true*/
+public void removeDup(Node head){
+    HashTable m = new HashTable();
+    Node n = head;
+    Node previous = null
+    while(n != null){
+        if(!m.contains(n.data)){
+            m.put(n.data,true);
+            previous = n; //set previous as n
+        }
+        else{
+            previous.next = n.next.next; //if duplicate den set next to next for current.
+        }
+        n = n.next;
+    }
+}
+------------------------------------------------------------------
+public void removeDupTwoptr(Node head){
+    Node curr = head;
+    Node runner = curr;
+    while(curr != null){
+        runner = curr; //setting again runner to the current node.
+        while(runner.next != null){
+            if(curr.data = runner.data){//checks for the duplicates for current with next to next and if yes places it
+                runner.next = runner.next.next;
+            }
+            else {
+                runner = runner.next; //moving the runner to the next node.
+            }
+        }
+        curr = curr.next; //moving the curr to the next node for outer while loop.
+    }
+}
+------------------------------------------------------------------
+/* Find Nth element from LinkList */
+public Node nThNode(Node head, int n){
+    if(head == null || n < 1) return null;
+    Node p1 = head;
+    Node p2 = head;
+    for(int i = 0; i < n-1; i++){
+        if(p2 == null){
+            System.out.println("Not found");
+        }
+        p2 = p2.next;
+    }
+    while(p2 != null){
+        p1 = p1.next;
+        p2 = p2.next;
+    }
+    return p1;
+}
+------------------------------------------------------------------
+/*Design an OO parking lot*/.l
+------------------------------------------------------------------
+public boolean isBinarySearchTree(TreeNode p, int min, int max){
+    if(p == null) return true;
+    
+    if(p.val <= min || p.val >= max)
+        return false;
+        
+    return isBinarySearchTree(p.left,min,p.val) && isBinarySearchTree(p.right,p.val,max);    
+}
+------------------------------------------------------------------
+/* Find the minimum value in the binary search tree */
+public int minBST(Node root){
+    if(root.left == null) return root.val;
+
+   return minBST(root.left);
+}
+------------------------------------------------------------------
+/* need to look into this */
+public Node deleteNode(Node n){
+    if(n == null || n.next == null) return n;
+    
+    Node next = n.next;
+    n.data = next.data;
+    n.next = next.next;
+    return true;
+}
+------------------------------------------------------------------
+public boolean addLinkList(Node head1, Node head2){
+    if(str1 != str2) return false;
+    int count = 0;
+    for(int i = 0; i < str1.length(); i++){
+        if(str1.charAt(i) != str2.charAt(2))
+            count++;
+        if(count > 1) return false;
+    }
+    return true;
+}
+------------------------------------------------------------------
+public void sumList(Node head){
+    Node head1 = head;
+    while(head1.next != null){
+        head1 = head1.next;
+    }
+    while(head.next != null){
+        head.data = head.data + head1.data;
+        if(head.data > 9){
+            
+        }
+        head = head.next;
+    }
+}
+------------------------------------------------------------------
+/*BFS tree traversal using python*/
+from collections import deque
+
+class Node:
+
+       def __init__(self,info):
+
+           self.info = info
+           self.left = None
+           self.right = None
+           self.level = None
+
+       def __str__(self):
+
+           return str(self.info)
+
+
+def BFT(node):
+
+    node.level = 1
+    queue = deque([node])
+    output = []
+    current_level = node.level
+
+    while len(queue)>0:
+
+          current_node = queue.popleft()
+
+          if(current_node.level > current_level):
+              output.append("\n")
+              current_level += 1
+
+          output.append(str(current_node))
+
+          if current_node.left != None:
+             current_node.left.level = current_level + 1 
+             queue.append(current_node.left)  //appending to the queue
+
+          if current_node.right != None:
+             current_node.right.level = current_level + 1 
+             queue.append(current_node.right)
+
+                 
+ 
+    return ''.join(output)
+
+root = Node(9)
+root.left = Node(2)
+root.right = Node(4)
+
+root.left.left = Node(1)
+root.left.right = Node(3)
+
+root.right.left = Node(5)
+root.right.right = Node(7)
+
+print BFT(root)
+     
